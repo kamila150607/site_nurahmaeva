@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mila_nail_pro{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="header">
+</div>
+    </div>
+        <div>
+            <h1>Mila_nail_pro</h1>
+            <p>«Опрятные руки — визитная карточка женщины».</p>
+        </div>
+    </div>
+</div>
+            <nav class="nav">
+                <a href="{% url 'index' %}">Главная</a>
+                <a href="{% url 'client_list' %}">Клиенты</a>
+                <a href="{% url 'master_list' %}">Мастера</a>
+                <a href="{% url 'price_list' %}">Услуги</a>
+                <a href="{% url 'appointment_list' %}">Записи</a>
+            </nav>
+        </div>
+    </header>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Студия маникюра. Все права защищены.</p>
+        <p>Запись по телефону: +7 (240) 123-45-67</p>
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    </footer>
+</body>
+</html>

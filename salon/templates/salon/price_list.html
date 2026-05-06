@@ -1,0 +1,34 @@
+{% extends 'salon/base.html' %}
+
+{% block title %}Услуги и цены - Студия маникюра{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h2 class="card-title" style="margin-bottom: 0;">💅 Наши услуги</h2>
+        <a href="{% url 'price_create' %}" class="btn btn-primary">➕ Добавить услугу</a>
+    </div>
+    
+    {% if services %}
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+        {% for service in services %}
+        <div class="card" style="margin-bottom: 0;">
+            <h3 style="color: var(--primary-red); margin-bottom: 0.5rem;">{{ service.procedure_name }}</h3>
+            <p style="font-size: 1.5rem; font-weight: bold; color: var(--dark-red); margin: 0.5rem 0;">
+                {{ service.price }} ₽
+            </p>
+            <p style="color: var(--gray-600); font-size: 0.9rem;">
+                Записей: {{ service.appointments.count }}
+            </p>
+            <div style="margin-top: 1rem;">
+                <a href="{% url 'price_update' service.pk %}" class="btn btn-warning btn-sm">✏️ Редактировать</a>
+                <a href="{% url 'price_delete' service.pk %}" class="btn btn-danger btn-sm">🗑️ Удалить</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>Нет услуг. <a href="{% url 'price_create' %}">Добавьте первую услугу</a></p>
+    {% endif %}
+</div>
+{% endblock %}

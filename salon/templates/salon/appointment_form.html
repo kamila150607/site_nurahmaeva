@@ -1,0 +1,37 @@
+{% extends 'salon/base.html' %}
+
+{% block title %}
+    {% if form.instance.pk %}Редактировать запись{% else %}Новая запись{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2 class="card-title">
+        {% if form.instance.pk %}✏️ Редактировать запись{% else %}➕ Создать запись{% endif %}
+    </h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+                <div style="color: rgb(204, 115, 186); font-size: 0.8rem; margin-top: 0.3rem;">
+                    {{ field.errors }}
+                </div>
+            {% endif %}
+            {% if field.help_text %}
+                <small style="color: var(--gray-600);">{{ field.help_text }}</small>
+            {% endif %}
+        </div>
+        {% endfor %}
+        
+        <div style="margin-top: 1.5rem;">
+            <button type="submit" class="btn btn-primary">💾 Сохранить</button>
+            <a href="{% url 'appointment_list' %}" class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
