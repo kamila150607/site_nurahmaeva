@@ -1,51 +1,707 @@
+Here is the HTML document with the CSS integrated, creating a lavender-themed website for a nail studio.
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Mila_nail_pro{% endblock %}</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Mila_nail_pro | Студия маникюра</title>
+    
+    <!-- Google Fonts: элегантные шрифты для косметического салона -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6 (бесплатные иконки) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* ========== ЛАВАНДОВО-БЕЛАЯ ТЕМА + АНИМАЦИИ ========== */
+        :root {
+            --primary-lavender: #9b59b6;
+            --dark-lavender: #8e44ad;
+            --light-lavender: #f3e5f5;
+            --soft-lavender: #e8d5f5;
+            --white: #ffffff;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-600: #6c757d;
+            --gray-800: #343a40;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Фон с лавандовым паттерном и градиентом */
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(135deg, #f5f0ff, #e8d5f5);
+            background-color: #f8f4ff;
+            background-image: radial-gradient(#9b59b6 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: var(--gray-800);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Шапка сайта с градиентом */
+        .header {
+            background: linear-gradient(135deg, var(--primary-lavender), var(--dark-lavender));
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.5px;
+        }
+
+        .logo p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .nav {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.2s;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Контейнер */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Карточки */
+        .card {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .card-title {
+            color: var(--primary-lavender);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            border-bottom: 2px solid var(--gray-200);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Статистика */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--white), var(--soft-lavender));
+            border-left: 4px solid var(--primary-lavender);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-lavender);
+        }
+
+        .stat-label {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        /* Таблицы */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            background: var(--white);
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        th {
+            background: var(--primary-lavender);
+            color: var(--white);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        tr:hover {
+            background: var(--light-lavender);
+        }
+
+        /* Кнопки */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            margin: 0.2rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-lavender);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-lavender);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--gray-600);
+            color: var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-800);
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: var(--white);
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        .btn-warning {
+            background: #f39c12;
+            color: var(--white);
+        }
+
+        .btn-warning:hover {
+            background: #e67e22;
+        }
+
+        .btn-info {
+            background: #3498db;
+            color: var(--white);
+        }
+
+        .btn-info:hover {
+            background: #2980b9;
+        }
+
+        /* Формы */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s, box-shadow 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-lavender);
+            box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.1);
+        }
+
+        /* Статусы */
+        .status {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-scheduled {
+            background: #fff3e0;
+            color: #f39c12;
+        }
+
+        .status-completed {
+            background: #e8f8f5;
+            color: #27ae60;
+        }
+
+        .status-cancelled {
+            background: #fdedec;
+            color: #e74c3c;
+        }
+
+        /* Сообщения */
+        .messages {
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 0 2rem;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .alert-success {
+            background: #e8f8f5;
+            color: #27ae60;
+            border-left: 4px solid #27ae60;
+        }
+
+        .alert-error {
+            background: #fdedec;
+            color: #e74c3c;
+            border-left: 4px solid #e74c3c;
+        }
+
+        /* Фильтры */
+        .filters {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--soft-lavender);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: flex-end;
+        }
+
+        /* Подвал */
+        .footer {
+            background: var(--gray-800);
+            color: var(--white);
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .nav {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .table-container table, 
+            .table-container thead, 
+            .table-container tbody, 
+            .table-container th, 
+            .table-container td, 
+            .table-container tr {
+                display: block;
+            }
+            
+            .table-container th {
+                display: none;
+            }
+            
+            .table-container td {
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+            
+            .table-container td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 1rem;
+                font-weight: bold;
+                text-align: left;
+            }
+        }
+
+        /* Лавандовые акценты */
+        a {
+            color: var(--primary-lavender);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--dark-lavender);
+            text-decoration: underline;
+        }
+
+        ::selection {
+            background: var(--primary-lavender);
+            color: var(--white);
+        }
+
+        .btn i, .btn i {
+            margin-right: 0.3rem;
+        }
+
+        /* Кастомный скролл */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--soft-lavender);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-lavender);
+            border-radius: 10px;
+        }
+        
+        /* Hero секция для главной */
+        .hero-section {
+            background: linear-gradient(120deg, rgba(155,89,182,0.1), rgba(142,68,173,0.05));
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .hero-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: var(--dark-lavender);
+        }
+        
+        /* Бейджи */
+        .badge-lavender {
+            background: var(--light-lavender);
+            color: var(--dark-lavender);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-</div>
-    </div>
-        <div>
-            <h1>Mila_nail_pro</h1>
+
+<header class="header">
+    <div class="header-content">
+        <div class="logo">
+            <h1><i class="fas fa-spa"></i> Mila_nail_pro</h1>
             <p>«Опрятные руки — визитная карточка женщины».</p>
         </div>
+        <nav class="nav">
+            <a href="#"><i class="fas fa-home"></i> Главная</a>
+            <a href="#clients"><i class="fas fa-users"></i> Клиенты</a>
+            <a href="#masters"><i class="fas fa-user-check"></i> Мастера</a>
+            <a href="#services"><i class="fas fa-hand-sparkles"></i> Услуги</a>
+            <a href="#appointments"><i class="fas fa-calendar-alt"></i> Записи</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Блок сообщений (демо) -->
+<div class="messages">
+    <div class="alert alert-success">
+        <i class="fas fa-check-circle"></i> Добро пожаловать в студию маникюра Mila_nail_pro! Ваши руки в надежных руках.
     </div>
 </div>
-            <nav class="nav">
-                <a href="{% url 'index' %}">Главная</a>
-                <a href="{% url 'client_list' %}">Клиенты</a>
-                <a href="{% url 'master_list' %}">Мастера</a>
-                <a href="{% url 'price_list' %}">Услуги</a>
-                <a href="{% url 'appointment_list' %}">Записи</a>
-            </nav>
-        </div>
-    </header>
 
-    {% if messages %}
-    <div class="messages">
-        {% for message in messages %}
-        <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">
-            {{ message }}
-        </div>
-        {% endfor %}
+<main class="container">
+    <!-- HERO / ВСТУПЛЕНИЕ -->
+    <div class="hero-section">
+        <h2><i class="fas fa-feather-alt"></i> Идеальный маникюр для вас</h2>
+        <p>Профессиональный уход, лавандовое настроение и безупречный сервис. Запишитесь уже сегодня!</p>
+        <a href="#" class="btn btn-primary" style="margin-top: 1rem;"><i class="fas fa-calendar-plus"></i> Онлайн-запись</a>
     </div>
-    {% endif %}
 
-    <main class="container">
-        {% block content %}
-        {% endblock %}
-    </main>
+    <!-- Блок статистики (пример данных) -->
+    <div class="stats-grid">
+        <div class="card stat-card">
+            <div class="stat-number">127</div>
+            <div class="stat-label"><i class="fas fa-smile"></i> Довольных клиентов</div>
+        </div>
+        <div class="card stat-card">
+            <div class="stat-number">4</div>
+            <div class="stat-label"><i class="fas fa-brush"></i> Сертифицированных мастера</div>
+        </div>
+        <div class="card stat-card">
+            <div class="stat-number">18</div>
+            <div class="stat-label"><i class="fas fa-spray-can-sparkles"></i> Видов процедур</div>
+        </div>
+        <div class="card stat-card">
+            <div class="stat-number">342</div>
+            <div class="stat-label"><i class="fas fa-calendar-check"></i> Записей выполнено</div>
+        </div>
+    </div>
 
-    <footer class="footer">
-        <p>&copy; 2026 Студия маникюра. Все права защищены.</p>
-        <p>Запись по телефону: +7 (240) 123-45-67</p>
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
-    </footer>
+    <!-- РАЗДЕЛ КЛИЕНТЫ (id для навигации) -->
+    <div id="clients" class="card">
+        <div class="card-title">
+            <i class="fas fa-users"></i> Наши постоянные клиенты
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr><th>Имя клиента</th><th>Телефон</th><th>Последний визит</th><th>Действия</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Имя клиента">Анна Воронцова</td><td data-label="Телефон">+7 (912) 345-67-89</td><td data-label="Последний визит">12.04.2026</td><td data-label="Действия"><button class="btn btn-info btn-sm"><i class="fas fa-eye"></i> Профиль</button></td></tr>
+                    <tr><td data-label="Имя клиента">Екатерина Морозова</td><td data-label="Телефон">+7 (903) 123-45-67</td><td data-label="Последний визит">05.05.2026</td><td data-label="Действия"><button class="btn btn-info btn-sm"><i class="fas fa-eye"></i> Профиль</button></td></tr>
+                    <tr><td data-label="Имя клиента">Мария Светлова</td><td data-label="Телефон">+7 (999) 888-77-66</td><td data-label="Последний визит">20.05.2026</td><td data-label="Действия"><button class="btn btn-info btn-sm"><i class="fas fa-eye"></i> Профиль</button></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="margin-top: 1rem; text-align: right;">
+            <button class="btn btn-primary"><i class="fas fa-user-plus"></i> Добавить клиента</button>
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ МАСТЕРА -->
+    <div id="masters" class="card">
+        <div class="card-title">
+            <i class="fas fa-user-check"></i> Наши мастера
+        </div>
+        <div class="table-container">
+            <table>
+                <thead><tr><th>Имя мастера</th><th>Специализация</th><th>Стаж</th><th>Рейтинг</th></tr></thead>
+                <tbody>
+                    <tr><td data-label="Имя мастера">Милана Соболева</td><td data-label="Специализация">Маникюр, дизайн, педикюр</td><td data-label="Стаж">8 лет</td><td data-label="Рейтинг">⭐ 4.9</td></tr>
+                    <tr><td data-label="Имя мастера">Ксения Лавандовая</td><td data-label="Специализация">Аппаратный маникюр, покрытие</td><td data-label="Стаж">5 лет</td><td data-label="Рейтинг">⭐ 4.8</td></tr>
+                    <tr><td data-label="Имя мастера">Алина Розова</td><td data-label="Специализация">Наращивание, художественная роспись</td><td data-label="Стаж">6 лет</td><td data-label="Рейтинг">⭐ 5.0</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ УСЛУГИ / ПРАЙС -->
+    <div id="services" class="card">
+        <div class="card-title">
+            <i class="fas fa-hand-sparkles"></i> Услуги и цены
+        </div>
+        <div class="table-container">
+            <table>
+                <thead><tr><th>Услуга</th><th>Длительность</th><th>Цена</th><th>Популярность</th></tr></thead>
+                <tbody>
+                    <tr><td data-label="Услуга">Классический маникюр</td><td data-label="Длительность">60 мин</td><td data-label="Цена">1200 ₽</td><td data-label="Популярность"><span class="badge-lavender">🔥 Хит</span></td></tr>
+                    <tr><td data-label="Услуга">Покрытие гель-лак (Shellac)</td><td data-label="Длительность">45 мин</td><td data-label="Цена">1500 ₽</td><td data-label="Популярность"><span class="badge-lavender">★ Топ</span></td></tr>
+                    <tr><td data-label="Услуга">Дизайн + стемпинг</td><td data-label="Длительность">30 мин +</td><td data-label="Цена">от 500 ₽</td><td data-label="Популярность">🌸 Модный</td></tr>
+                    <tr><td data-label="Услуга">Spa-уход с лавандой</td><td data-label="Длительность">90 мин</td><td data-label="Цена">2500 ₽</td><td data-label="Популярность"><span class="badge-lavender">✨ Новинка</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ ЗАПИСИ (с фильтрами и статусами) -->
+    <div id="appointments" class="card">
+        <div class="card-title">
+            <i class="fas fa-calendar-alt"></i> Ближайшие записи
+        </div>
+        <!-- Фильтры в стиле лаванда -->
+        <div class="filters">
+            <div style="flex:1; min-width: 150px;">
+                <label>Статус записи</label>
+                <select class="form-control" style="background: white;">
+                    <option>Все</option>
+                    <option>Запланировано</option>
+                    <option>Выполнено</option>
+                    <option>Отменено</option>
+                </select>
+            </div>
+            <div style="flex:1; min-width: 150px;">
+                <label>Мастер</label>
+                <select class="form-control">
+                    <option>Любой</option>
+                    <option>Милана Соболева</option>
+                    <option>Ксения Лавандовая</option>
+                    <option>Алина Розова</option>
+                </select>
+            </div>
+            <div>
+                <button class="btn btn-primary" style="margin-top: 1.7rem;"><i class="fas fa-filter"></i> Применить</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr><th>Клиент</th><th>Услуга</th><th>Мастер</th><th>Дата и время</th><th>Статус</th><th>Действия</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="Клиент">Анна Воронцова</td>
+                        <td data-label="Услуга">Покрытие гель-лак</td>
+                        <td data-label="Мастер">Милана Соболева</td>
+                        <td data-label="Дата">28.05.2026 15:00</td>
+                        <td data-label="Статус"><span class="status status-scheduled"><i class="far fa-clock"></i> Запланировано</span></td>
+                        <td data-label="Действия"><button class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Изменить</button> <button class="btn btn-danger btn-sm"><i class="fas fa-times"></i> Отмена</button></td>
+                    </tr>
+                    <tr>
+                        <td data-label="Клиент">Екатерина Морозова</td>
+                        <td data-label="Услуга">Spa-уход с лавандой</td>
+                        <td data-label="Мастер">Ксения Лавандовая</td>
+                        <td data-label="Дата">30.05.2026 11:30</td>
+                        <td data-label="Статус"><span class="status status-scheduled"><i class="far fa-clock"></i> Запланировано</span></td>
+                        <td data-label="Действия"><button class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></button> <button class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td data-label="Клиент">Ольга Сереброва</td>
+                        <td data-label="Услуга">Классический маникюр</td>
+                        <td data-label="Мастер">Алина Розова</td>
+                        <td data-label="Дата">25.05.2026 10:00</td>
+                        <td data-label="Статус"><span class="status status-completed"><i class="fas fa-check-circle"></i> Выполнено</span></td>
+                        <td data-label="Действия"><button class="btn btn-info btn-sm"><i class="fas fa-eye"></i> Детали</button></td>
+                    </tr>
+                    <tr>
+                        <td data-label="Клиент">Дарья Мельник</td>
+                        <td data-label="Услуга">Дизайн + френч</td>
+                        <td data-label="Мастер">Милана Соболева</td>
+                        <td data-label="Дата">27.05.2026 14:20</td>
+                        <td data-label="Статус"><span class="status status-cancelled"><i class="fas fa-ban"></i> Отменено</span></td>
+                        <td data-label="Действия"><button class="btn btn-secondary btn-sm"><i class="fas fa-redo-alt"></i> Перезапись</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="margin-top: 1rem;">
+            <button class="btn btn-primary"><i class="fas fa-plus-circle"></i> Новая запись</button>
+            <button class="btn btn-secondary"><i class="fas fa-download"></i> Экспорт</button>
+        </div>
+    </div>
+
+    <!-- КАРТОЧКА ДЛЯ ФОРМЫ ЗАПИСИ (пример интерактива) -->
+    <div class="card">
+        <div class="card-title"><i class="fas fa-pen-alt"></i> Быстрая запись через форму</div>
+        <div class="form-group">
+            <label for="clientName">Ваше имя</label>
+            <input type="text" id="clientName" class="form-control" placeholder="Например, Елена">
+        </div>
+        <div class="form-group">
+            <label for="serviceSelect">Услуга</label>
+            <select id="serviceSelect" class="form-control">
+                <option>Классический маникюр (1200 ₽)</option>
+                <option>Покрытие гель-лак (1500 ₽)</option>
+                <option>Spa-уход с лавандой (2500 ₽)</option>
+                <option>Дизайн люкс (от 800 ₽)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="datePick">Предпочтительная дата</label>
+            <input type="date" id="datePick" class="form-control">
+        </div>
+        <button class="btn btn-primary" id="demoBookingBtn"><i class="fas fa-calendar-check"></i> Отправить заявку</button>
+        <p id="demoMessage" style="margin-top: 1rem; font-size: 0.9rem;"></p>
+    </div>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2026 Студия маникюра Mila_nail_pro. Все права защищены.</p>
+    <p><i class="fas fa-phone-alt"></i> Запись по телефону: +7 (240) 123-45-67 | <i class="fab fa-instagram"></i> @mila_nail_pro</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem;">Лавандовое настроение и безупречный сервис</p>
+</footer>
+
+<!-- Небольшой JS для имитации отправки формы (необязательно, но добавляет живость) -->
+<script>
+    document.getElementById('demoBookingBtn')?.addEventListener('click', function(e){
+        e.preventDefault();
+        const nameInput = document.getElementById('clientName');
+        const service = document.getElementById('serviceSelect');
+        const dateVal = document.getElementById('datePick');
+        const msgDiv = document.getElementById('demoMessage');
+        if(!nameInput.value.trim()){
+            msgDiv.innerHTML = '<span style="color:#e74c3c;"><i class="fas fa-exclamation-circle"></i> Пожалуйста, введите имя!</span>';
+            msgDiv.style.opacity = '1';
+            setTimeout(() => { msgDiv.style.opacity = '0'; setTimeout(() => msgDiv.innerHTML='', 800); }, 2500);
+            return;
+        }
+        msgDiv.innerHTML = `<span style="color:#27ae60;"><i class="fas fa-check-circle"></i> Спасибо, ${nameInput.value.trim()}! Ваша заявка на "${service.value}" получена. Мы свяжемся с вами в ближайшее время.</span>`;
+        msgDiv.style.opacity = '1';
+        // очистка полей для демо-эффекта (необязательно)
+        setTimeout(() => {
+            msgDiv.style.opacity = '0';
+            setTimeout(() => msgDiv.innerHTML='', 1000);
+        }, 4000);
+        // не сбрасывает всё ради удобства теста
+    });
+    
+    // небольшая анимация наведения для статусов
+    console.log("Mila_nail_pro — лавандовый сайт загружен");
+</script>
+
 </body>
 </html>
+```
